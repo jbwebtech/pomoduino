@@ -1,2 +1,2 @@
 # pomoduino
-Pomoduino - an Arduino Pomodoro Timer
+Pomoduino - the Arduino Pomodoro Timer
