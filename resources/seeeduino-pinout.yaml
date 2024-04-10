@@ -117,12 +117,12 @@ pins:
       - power3v3
       - vcc
       - vin
-12:
+  12:
     type:
       - ground
     direction: []
     capabilities: []
-13:
+  13:
     type:
       - power
     direction:
