@@ -1,134 +1,82 @@
 model: Seeeduino XAIO
 pins:
   0: 
-    type:
-      - analog
-      - digital
-    direction:
-      - input
-      - output
+    type: ANALOG_DIGITAL
+    direction: INPUT_OUTPUT
     capabilities:
       - dac
   1:
-    type:
-      - analog
-      - digital
-    direction:
-      - input
-      - output
+    type: ANALOG_DIGITAL
+    direction: INPUT_OUTPUT
     capabilities: []
   2:
-    type:
-      - analog
-      - digital
-    direction:
-      - input
-      - output
+    type: ANALOG_DIGITAL
+    direction: INPUT_OUTPUT
     capabilities: []
   3:
-    type:
-      - analog
-      - digital
-    direction:
-      - input
-      - output
+    type: ANALOG_DIGITAL
+    direction: INPUT_OUTPUT
     capabilities: []
   4:
-    type:
-      - analog
-      - digital
-    direction:
-      - input
-      - output
+    type: ANALOG_DIGITAL
+    direction: INPUT_OUTPUT
     capabilities:
       - iic
       - sda
   5:
-    type:
-      - analog
-      - digital
-    direction:
-      - input
-      - output
+    type: ANALOG_DIGITAL
+    direction: INPUT_OUTPUT
     capabilities:
       - iic
       - scl
   6:
-    type:
-      - analog
-      - digital
-    direction:
-      - input
-      - output
+    type: ANALOG_DIGITAL
+    direction: INPUT_OUTPUT
     capabilities:
       - uart
       - tx
   7:
-    type:
-      - analog
-      - digital
-    direction:
-      - input
-      - output
+    type: ANALOG_DIGITAL
+    direction: INPUT_OUTPUT
     capabilities:
       - uart
       - rx
   8:
-    type:
-      - analog
-      - digital
-    direction:
-      - input
-      - output
+    type: ANALOG_DIGITAL
+    direction: INPUT_OUTPUT
     capabilities:
       - spi
       - sck
   9:
-    type:
-      - analog
-      - digital
-    direction:
-      - input
-      - output
+    type: ANALOG_DIGITAL
+    direction: INPUT_OUTPUT
     capabilities:
       - spi
       - miso
       - poci
       - sdi
   10:
-    type:
-      - analog
-      - digital
-    direction:
-      - input
-      - output
+    type: ANALOG_DIGITAL
+    direction: INPUT_OUTPUT
     capabilities:
       - spi
       - mosi
       - pico
       - sdo
   11:
-    type:
-      - power
-    direction:
-      - input
-      - output
+    type: POWER
+    direction: INPUT_OUTPUT
     capabilities:
       - power3v3
       - vcc
       - vin
   12:
-    type:
-      - ground
-    direction: []
+    type: GROUND
+    direction: INPUT_OUTPUT
     capabilities: []
   13:
-    type:
-      - power
-    direction:
-      - input
-      - output
+    type: POWER
+    direction: INPUT
     capabilities:
       - power5v
-      - vcc
       - vin
