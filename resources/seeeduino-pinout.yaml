@@ -5,9 +5,7 @@ pins:
     direction: INPUT_OUTPUT
     capabilities:
       - dac
-      - range:
-        - power0v
-        - power3v3
+      - range: [ 0.0, 3.3 ]
   1:
     type: ANALOG_DIGITAL
     direction: INPUT_OUTPUT
