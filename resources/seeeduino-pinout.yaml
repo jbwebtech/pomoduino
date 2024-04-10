@@ -66,3 +66,72 @@ pins:
     capabilities:
       - uart
       - tx
+  7:
+    type:
+      - analog
+      - digital
+    direction:
+      - input
+      - output
+    capabilities:
+      - uart
+      - Rx
+  8:
+    type:
+      - analog
+      - digital
+    direction:
+      - input
+      - output
+    capabilities:
+      - spi
+      - sck
+  9:
+    type:
+      - analog
+      - digital
+    direction:
+      - input
+      - output
+    capabilities:
+      - spi
+      - miso
+      - poci
+      - sdi
+  10:
+    type:
+      - analog
+      - digital
+    direction:
+      - input
+      - output
+    capabilities:
+      - spi
+      - mosi
+      - pico
+      - sdo
+  11:
+    type:
+      - power
+    direction:
+      - input
+      - output
+    capabilities:
+      - power3v3
+      - vcc
+      - vin
+12:
+    type:
+      - ground
+    direction: []
+    capabilities: []
+13:
+    type:
+      - power
+    direction:
+      - input
+      - output
+    capabilities:
+      - power5v
+      - vcc
+      - vin
