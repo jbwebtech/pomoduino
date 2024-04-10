@@ -11,8 +11,58 @@ pins:
       - input
       - output
     capabilities:
-      - pwm
-      - iic
-      - digital
+      - dac
+  1:
+    type:
       - analog
-      - spi
+      - digital
+    direction:
+      - input
+      - output
+    capabilities: []
+  2:
+    type:
+      - analog
+      - digital
+    direction:
+      - input
+      - output
+    capabilities: []
+  3:
+    type:
+      - analog
+      - digital
+    direction:
+      - input
+      - output
+    capabilities: []
+  4:
+    type:
+      - analog
+      - digital
+    direction:
+      - input
+      - output
+    capabilities:
+      - iic
+      - sda
+  5:
+    type:
+      - analog
+      - digital
+    direction:
+      - input
+      - output
+    capabilities:
+      - iic
+      - scl
+  6:
+    type:
+      - analog
+      - digital
+    direction:
+      - input
+      - output
+    capabilities:
+      - uart
+      - tx
