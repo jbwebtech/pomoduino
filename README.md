@@ -17,8 +17,9 @@ Pomoduino is an Arduino-based Pomodoro timer designed to enhance productivity an
 
 This will enable the Arduino IDE to access the Seeeduino board definitions for installation.
 
-## Seeeduino XIAO Pinouts
+## Seeeduino XIAO
+
+Getting Started Guide:  
+https://wiki.seeedstudio.com/Seeeduino-XIAO/
 
 ![Seeeduino XIAO Pinouts](./resources/Seeeduino-XIAO-pinout-1.jpg)
-
-This image shows the pinout diagram for the Seeeduino XIAO SAMD21 Arduino board.
