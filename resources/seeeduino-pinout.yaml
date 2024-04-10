@@ -4,8 +4,8 @@ pins:
     type:
       - analog
       - digital
-      - 5v
-      - 12v
+      - power5v
+      - power12v
       - ground
     direction:
       - input
