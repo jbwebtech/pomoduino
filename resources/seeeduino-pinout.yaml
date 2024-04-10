@@ -76,11 +76,10 @@ pins:
       - sdo
   11:
     type: POWER
-    direction: INPUT_OUTPUT
+    direction: OUTPUT
     capabilities:
       - power3v3
       - vcc
-      - vin
   12:
     type: GROUND
     direction: INPUT_OUTPUT
