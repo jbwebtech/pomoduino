@@ -5,52 +5,62 @@ pins:
     direction: INPUT_OUTPUT
     capabilities:
       - dac
+      - range: [ power0v, power3v3 ]
   1:
     type: ANALOG_DIGITAL
     direction: INPUT_OUTPUT
-    capabilities: []
+    capabilities:
+      - pwm
   2:
     type: ANALOG_DIGITAL
     direction: INPUT_OUTPUT
-    capabilities: []
+    capabilities:
+      - pwm
   3:
     type: ANALOG_DIGITAL
     direction: INPUT_OUTPUT
-    capabilities: []
+    capabilities:
+      - pwm
   4:
     type: ANALOG_DIGITAL
     direction: INPUT_OUTPUT
     capabilities:
+      - pwm
       - iic
       - sda
   5:
     type: ANALOG_DIGITAL
     direction: INPUT_OUTPUT
     capabilities:
+      - pwm
       - iic
       - scl
   6:
     type: ANALOG_DIGITAL
     direction: INPUT_OUTPUT
     capabilities:
+      - pwm
       - uart
       - tx
   7:
     type: ANALOG_DIGITAL
     direction: INPUT_OUTPUT
     capabilities:
+      - pwm
       - uart
       - rx
   8:
     type: ANALOG_DIGITAL
     direction: INPUT_OUTPUT
     capabilities:
+      - pwm
       - spi
       - sck
   9:
     type: ANALOG_DIGITAL
     direction: INPUT_OUTPUT
     capabilities:
+      - pwm
       - spi
       - miso
       - poci
@@ -59,6 +69,7 @@ pins:
     type: ANALOG_DIGITAL
     direction: INPUT_OUTPUT
     capabilities:
+      - pwm
       - spi
       - mosi
       - pico
