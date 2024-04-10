@@ -1,0 +1,18 @@
+model: Seeeduino XAIO
+pins:
+  0: 
+    type:
+      - analog
+      - digital
+      - 5v
+      - 12v
+      - ground
+    direction:
+      - input
+      - output
+    capabilities:
+      - pwm
+      - iic
+      - digital
+      - analog
+      - spi
