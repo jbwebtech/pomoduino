@@ -72,7 +72,7 @@ pins:
       - output
     capabilities:
       - uart
-      - Rx
+      - rx
   8:
     type:
       - analog
