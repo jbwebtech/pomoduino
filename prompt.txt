@@ -1,0 +1,7 @@
+
+Components: 
+ - Seeeduino XIAO SAMD21 Arduino microcontroller (https://seeedstudio.com/Seeeduino-XIAO-Arduino-Microcontroller-SAMD21-Cortex-M0+-p-4426.html)
+ - NeoPixel Ring, 24 x 5050 RGBW LEDs w/ Integrated Drivers, Natural White, ~4500K, ADA2862 (https://www.adafruit.com/product/2862)
+ - MakerFocus I2C OLED Display Screen Module, SSD1306 (https://www.amazon.com/gp/product/B079BN2J8V/)
+ - Adafruit I2C 12-Key Capacitive Touch Sensor Breakout, MPR121 (https://www.adafruit.com/product/1982)
+ - Adafruit I2C Non-Volatile FRAM Breakout, 256Kbit, 32KByte, ADA1895 (https://www.adafruit.com/product/1895)
