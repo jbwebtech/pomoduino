@@ -1,5 +1,87 @@
+We are building a desktop pomodoro timer based on Arduino with an LED ring, mini OLED screen, and basic capacitive touch controls.  
+It features a timer designed to separate deep work from break time with a colored countdown timer, eye-catching reminders, and 
+a play/pause feature.  
+
+When initially powered up, a chasing rainbow will animate the LED ring before settling in to a low white breathing glow. The screen 
+will flash the default mode of "50/10", indicating it is ready to start that mode.  Think like a microwave clock blinking after the 
+power goes out.  The user can then tap the Up or Down buttons to cycle through the available modes.  The times displayed on the screen 
+will remain flashing while the timer is not running (whether not started yet, paused mid-cycle, or completed cycle).  When the timer 
+is running, it will display the remaining minutes as a whole integer.  When the Deep Work portion of the cycle is complete and the 
+timer transitions to Break mode, the display shall show two dashes for the remaining Deep Work.  For example, "32/15" indicates 32 
+minutes remaining in a 50/15 cycle, and "--/8" indicates the Deep Work portion is complete and there is 8 minutes of Break time 
+remaining.  The low white breathing pulsing glow effect will always display when a program timer is not running.  A similar breathing 
+pulsing glow effect will display when a timer program is paused, except the color of the ring will match that of the parent cycle 
+type - either Deep Work or Break time.  Pressing the center button starts the selected mode from a paused state, or, when a countdown 
+timer program is running, pauses the current state. A one-second long press on the center button will cancel the existing countdown 
+timer program, returning to the idle screen.  Finally, the timer must require user input when it is Break time in order to effectively 
+trigger the end of a Deep Work cycle.  User acknowledgment will be double-tapping the center button.  So, at the end of a Deep Work cycle, 
+the program will not automatically transition to the Break time countdown timer.  Instead, the light ring will aggressively flash and 
+animate, prompting user interaction.  
+
+The LED ring is a critical component because the desktop pomodoro timer must be eye-catching and attention-getting to be effective, 
+which is accomplished with light patterns from the LED ring.  While the LED ring has 24 LEDs, the start position LED shall be 
+configurable to allow for installation discrepancies.  We'll reference the Start Position as the configured starting LED, and the End 
+Position as 23 LEDs beyond that.  As an example, with a Start Position of 1, the End Position shall be 24, while a Start Position of 
+6 will yield an End Position of 5.  The desired patterns shall be described as:
+ - Startup: quickly fade from 0% to 100%, followed by a fast chasing rainbow pattern.  The rainbow will chase the circumference of 
+   the LED ring twice in one second.  The colors shall be faded gradually together to create a smooth transition, not just red next 
+   to green next to blue, for example.
+ - Idle: subtle, gentle, pulsating, breathing white LEDs between 10-15% brightness.  A single LED will circle at 35% brightness from 
+   the start position (LED 1) to the end position (LED 24) in one second, then back to the start position in another one second.  This 
+   will repeat indefinitely
+ - Running: LED ring shall indicate visually how much time remains in the countdown timer as a function of time to the number of LEDs.  
+   Since there are only 24 LEDs, that would equal approximately 1 minute per LED in a 25-minute countdown timer and 2 minutes per LED 
+   in a 50 minute countdown timer.  As time counts down, the number of illuminated LEDs will reduce until time expires.  All active LEDs 
+   shall glow a steady 50% with the topmost LED pulsing between 50% and 100%.  The LEDs shall be red in a Deep Work cycle and green in a 
+   Break cycle. 
+ - Attention: quickly transition between fast breathing and chasing LEDs ranging in brightness from 25%-100%.  This pattern must be 
+   attention-getting as it requires user interaction to acknowledge a state change.
+ - Paused: mimic the Idle pattern but inherit the red or green color from whichever state is under pause.
+
+Form Factor:
+ - 3" diameter by 2" high cylindrical box
+ - LED ring mounted on the top of the cylinder, around the circumference
+ - OLED screen in the center, inside the LED ring
+ - Three capacitive buttons directly below the screen, inside the LED ring
+
+Inputs:
+ - Micro-USB power
+ - Three capacitive touch sensors acting as momentary buttons
+
+Outputs:
+ - 24 RGBW LED ring
+ - 128x32 pixel OLED monochrome display
+
+Features:
+ - Cycle through available modes by tapping the Up and Down buttons
+ - Add or Remove Deep Work runtime to a running countdown timer in 5-minute increments by tapping the Up and Down buttons
+ - Cycle through 5 brightness settings of the Running LEDs by long-pressing the Down button
+ - Cycle through 16 colors of the Running LEDs for the current Deep Work or Break cycle by long-pressing the Up button
+ - Start the selected or Pause the running countdown timer program by tapping the center button
+ - Stop the running countdown timer program by long-pressing the center button
+ - Acknowledge the end of a Deep Work cycle and beginning of a Break by double-tapping the center button (double-taps must occur within 
+   500 milliseconds)
+ - Settings shall be saved to the Non-Volatile FRAM memory
+
+Modes:
+ - 25/5 (25 minutes Deep Work, 5 minute Break)
+ - 50/10 (50 minutes Deep Work, 10 minute Break) - this is the default mode
+ - 75/15 (75 minutes Deep Work, 15 minute Break)
+ - 100/20 (100 minutes Deep Work, 20 minute Break)
+ - Tapping the Down button when stopped cycles through modes in descending order, which updates on the screen
+ - Tapping the Up button when stopped cycles through modes in ascending order, which updates on the screen
+ - Tapping the Center button when stopped starts the current timer with the selected (displayed) mode
+ - Tapping the Down button when running reduces the remaining duration of deep work in increments of 5 minutes; the amount of break 
+   time is not affected
+ - Tapping the Up button when running increases the remaining duration of deep work in increments of 5 minutes; the amount of break 
+   time is not affected
+ - Tapping the Center button when running pauses the current countdown timer, whether in Deep Work mode or Break mode
+ - Long-Pressing the Center button when running cancels the current countdown timer, returning to Idle
+ - Long-Pressing the Down button when running cycles through 5 brightness settings of the running LEDs
+ - Long-Pressing the Up button when running cycles through 16 colors of the running LEDs
 
 Components: 
+ - Powered by a 5 volt, 1 amp USB charger.
  - Seeeduino XIAO SAMD21 Arduino microcontroller (https://seeedstudio.com/Seeeduino-XIAO-Arduino-Microcontroller-SAMD21-Cortex-M0+-p-4426.html)
  - NeoPixel Ring, 24 x 5050 RGBW LEDs w/ Integrated Drivers, Natural White, ~4500K, ADA2862 (https://www.adafruit.com/product/2862)
  - MakerFocus I2C OLED Display Screen Module, SSD1306 (https://www.amazon.com/gp/product/B079BN2J8V/)
