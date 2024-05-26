@@ -8,19 +8,48 @@
 #include <Adafruit_MPR121.h>
 #include <Adafruit_FRAM_I2C.h>
 
-#define LED_PIN    6
+#define LED_PIN   19
 #define LED_COUNT 24
+#define NUM_LEDS  24
+
+// Parameter 1 = number of pixels in strip
+// Parameter 2 = Arduino pin number (most are valid)
+// Parameter 3 = pixel type flags, add together as needed:
+//   NEO_KHZ800  800 KHz bitstream (most NeoPixel products w/WS2812 LEDs)
+//   NEO_KHZ400  400 KHz (classic 'v1' (not v2) FLORA pixels, WS2811 drivers)
+//   NEO_GRB     Pixels are wired for GRB bitstream (most NeoPixel products)
+//   NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
+//   NEO_RGBW    Pixels are wired for RGBW bitstream (NeoPixel RGBW products)
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, LED_PIN, NEO_RGBW + NEO_KHZ800);
+
+// IMPORTANT: To reduce NeoPixel burnout risk, add 1000 uF capacitor across
+// pixel power leads, add 300 - 500 Ohm resistor on first pixel's data input
+// and minimize distance between Arduino and first pixel.  Avoid connecting
+// on a live circuit...if you must, connect GND first.
+
 
 // OLED display TWI address
 void startupAnimation() {
   // Fade in from 0% to 100% brightness
-  for(int brightness = 0; brightness <= 255; brightness += 5) {
+  for(int brightness = 0; brightness <= 255; brightness++) {
     for(int i = 0; i < strip.numPixels(); i++) {
-      strip.setPixelColor(i, strip.Color(brightness, brightness, brightness));
+      strip.setPixelColor(i, strip.Color(0, 0, 0, brightness));
     }
     strip.show();
-    delay(10);
+    delay(25);
   }
+  delay(500);
+
+  // Fade out from 100% to 5% brightness
+  for(int brightness = 255; brightness > 5; brightness--) {
+    for(int i = 0; i < strip.numPixels(); i++) {
+      strip.setPixelColor(i, strip.Color(0, 0, 0, brightness));
+    }
+    strip.show();
+    delay(25);
+  }
+  delay(1000);
+
   // Fast chasing rainbow pattern
   for(long firstPixelHue = 0; firstPixelHue < 5 * 65536; firstPixelHue += 256) {
     for(int i = 0; i < strip.numPixels(); i++) { // For each pixel in strip...
@@ -28,61 +57,60 @@ void startupAnimation() {
       strip.setPixelColor(i, strip.gamma32(strip.ColorHSV(pixelHue)));
     }
     strip.show(); // Update strip with new contents
-    delay(20); // Pause for a moment
+    delay(50); // Pause for a moment
   }
   // Settle into a low white breathing glow
-  for(int repeat = 0; repeat < 2; repeat++) {
+  for(int repeat = 0; repeat < 100; repeat++) {
     for(int brightness = 255; brightness >= 25; brightness -= 5) {
       for(int i = 0; i < strip.numPixels(); i++) {
         strip.setPixelColor(i, strip.Color(brightness, brightness, brightness));
       }
       strip.show();
-      delay(10);
+      delay(25);
     }
     for(int brightness = 25; brightness <= 255; brightness += 5) {
       for(int i = 0; i < strip.numPixels(); i++) {
         strip.setPixelColor(i, strip.Color(brightness, brightness, brightness));
       }
       strip.show();
-      delay(10);
+      delay(25);
     }
   }
 }
 
 void setup() {
-  Serial.begin(9600);
+  // Serial.begin(9600);
   
   // Initialize NeoPixel strip
-  startupAnimation(); // Execute the startup animation
-  Serial.begin(9600);
+  // startupAnimation(); // Execute the startup animation
+  // Serial.begin(9600);
   
   // Initialize NeoPixel strip
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
 
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
-  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Check your OLED address, it might be 0x3D for some models
-    Serial.println(F("SSD1306 allocation failed"));
-    for(;;); // Don't proceed, loop forever
-  }
-  display.display();
-  delay(2000); // Pause for 2 seconds
-  display.clearDisplay();
+  // if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Check your OLED address, it might be 0x3D for some models
+  //   Serial.println(F("SSD1306 allocation failed"));
+  //   for(;;); // Don't proceed, loop forever
+  // }
+  // display.display();
+  // delay(2000); // Pause for 2 seconds
+  // display.clearDisplay();
 
   // Initialize capacitive touch sensor
-  if (!cap.begin(0x5A)) {
-    Serial.println("MPR121 not found, check wiring?");
-    while (1);
-  }
-  Adafruit_FRAM_I2C fram = Adafruit_FRAM_I2C();
-  if (!fram.begin()) {
-    Serial.println("Could not find FRAM");
-    while (1);
-  }
-  Serial.println("FRAM found!");
-  loadSettings();
-  displayMode(); // Display the default mode on startup
-}
+  // if (!cap.begin(0x5A)) {
+  //   Serial.println("MPR121 not found, check wiring?");
+  //   while (1);
+  // }
+  // Adafruit_FRAM_I2C fram = Adafruit_FRAM_I2C();
+  // if (!fram.begin()) {
+  //   Serial.println("Could not find FRAM");
+  //   while (1);
+  // }
+  // Serial.println("FRAM found!");
+  // loadSettings();
+  // displayMode(); // Display the default mode on startup
 }
 
 void idleModeAnimation() {
@@ -132,44 +160,49 @@ bool touchInProgress = false; // Whether a touch is currently in progress
 const unsigned long longPressDuration = 500; // Duration in milliseconds that constitutes a long press
 
 void loop() {
-  checkInputs(); // Check for user inputs and handle them
+  // idleModeAnimation();
+  startupAnimation();
 
-  uint16_t touched = cap.touched();
+
+
+
+  // checkInputs(); // Check for user inputs and handle them
+
+  // uint16_t touched = cap.touched();
   
-  for (int i = 0; i < 3; i++) { // Check each button
-    if (touched & (1 << i)) { // If button i is touched
-      if (!touchInProgress) {
-        touchInProgress = true;
-        touchStartTime = millis();
-      } else {
-        if (millis() - touchStartTime > longPressDuration) {
-          // Long press detected
-          if (i == 1) { // Down button for brightness adjustment
-            adjustBrightness();
-            touchInProgress = false; // Reset touch detection
-          } else if (i == 0) { // Up button for color adjustment
-            adjustColor();
-            touchInProgress = false; // Reset touch detection
-          }
-        }
-      }
-    } else {
-      if (touchInProgress && (millis() - touchStartTime < longPressDuration)) {
-        // Short press detected
-        if (i == 1) { // Down button
-          // Placeholder for Down button short press action
-        } else if (i == 0) { // Up button
-          // Placeholder for Up button short press action
-        } else if (i == 2) { // Center button
-          // Placeholder for Center button short press action
-        }
-      }
-      touchInProgress = false;
-    }
-  }
+  // for (int i = 0; i < 3; i++) { // Check each button
+  //   if (touched & (1 << i)) { // If button i is touched
+  //     if (!touchInProgress) {
+  //       touchInProgress = true;
+  //       touchStartTime = millis();
+  //     } else {
+  //       if (millis() - touchStartTime > longPressDuration) {
+  //         // Long press detected
+  //         if (i == 1) { // Down button for brightness adjustment
+  //           adjustBrightness();
+  //           touchInProgress = false; // Reset touch detection
+  //         } else if (i == 0) { // Up button for color adjustment
+  //           adjustColor();
+  //           touchInProgress = false; // Reset touch detection
+  //         }
+  //       }
+  //     }
+  //   } else {
+  //     if (touchInProgress && (millis() - touchStartTime < longPressDuration)) {
+  //       // Short press detected
+  //       if (i == 1) { // Down button
+  //         // Placeholder for Down button short press action
+  //       } else if (i == 0) { // Up button
+  //         // Placeholder for Up button short press action
+  //       } else if (i == 2) { // Center button
+  //         // Placeholder for Center button short press action
+  //       }
+  //     }
+  //     touchInProgress = false;
+  //   }
+  // }
 
   // Placeholder for additional loop logic
-}
 }
 
 // Global variables for brightness and color settings
@@ -185,7 +218,7 @@ void adjustBrightness() {
 
 void adjustColor() {
   currentColorIndex = (currentColorIndex + 1) % 16; // Cycle through colors
-  updateLEDsColor();
+  // updateLEDsColor();
 }
 
 void updateLEDsBrightness() {
@@ -202,20 +235,20 @@ void updateLEDsBrightness() {
   strip.show();
 }
 
-void loadSettings() {
-  currentBrightnessLevel = fram.read8(0);
-  currentColorIndex = fram.read8(1);
+// void loadSettings() {
+//   currentBrightnessLevel = fram.read8(0);
+//   currentColorIndex = fram.read8(1);
 
-  // Ensure loaded values are within expected ranges
-  if (currentBrightnessLevel >= sizeof(brightnessLevels) / sizeof(brightnessLevels[0])) {
-    currentBrightnessLevel = 2; // Default value
-  }
-  if (currentColorIndex >= sizeof(colors) / sizeof(colors[0])) {
-    currentColorIndex = 0; // Default value
-  }
+//   // Ensure loaded values are within expected ranges
+//   if (currentBrightnessLevel >= sizeof(brightnessLevels) / sizeof(brightnessLevels[0])) {
+//     currentBrightnessLevel = 2; // Default value
+//   }
+//   if (currentColorIndex >= sizeof(colors) / sizeof(colors[0])) {
+//     currentColorIndex = 0; // Default value
+//   }
 
-  // Apply the loaded settings
-  updateLEDsBrightness();
-  updateLEDsColor();
-}
+//   // Apply the loaded settings
+//   updateLEDsBrightness();
+//   updateLEDsColor();
+// }
 
