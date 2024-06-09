@@ -1,8 +1,10 @@
 {
     "cSpell.words": [
         "Adafruit",
+        "bitstream",
         "FRAM",
         "Kbit",
+        "LEDS",
         "microcontroller",
         "OLED",
         "Pinout",
@@ -12,6 +14,7 @@
         "RGBW",
         "SAMD",
         "Seeeduino",
+        "SWITCHCAPVCC",
         "XIAO"
     ],
     "markdownlint.config": {
