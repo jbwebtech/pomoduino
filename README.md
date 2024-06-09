@@ -14,8 +14,12 @@ Pomoduino is an Arduino-based Pomodoro timer designed to enhance productivity an
    - In the Preferences window, find the `Additional Board Manager URLs` field.
    - Add the following URL to the field: `https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json`
    - Click `OK` to save the preferences.
+1. **Update VSCode Include Directory for WSL**
+   - Add Arduino library path `/mnt/c/Users/Your_Username/Documents/Arduino/libraries/**` to `c_cpp_properties.json`
+      - Note: do not escape spaces with a backslash
+1. **Restart VSCode**
 
-This will enable the Arduino IDE to access the Seeeduino board definitions for installation.
+This will enable the Arduino IDE to access the Seeeduino board definitions for installation and reference the C++ Arduino libraries in VSCode.
 
 ## Seeeduino XIAO
 

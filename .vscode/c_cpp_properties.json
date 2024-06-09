@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/mnt/c/Users/Username/Documents/Arduino/libraries/**"
+            ],
+            "defines": []
+        }
+    ],
+    "version": 4
+}
