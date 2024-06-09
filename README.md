@@ -15,7 +15,8 @@ Pomoduino is an Arduino-based Pomodoro timer designed to enhance productivity an
    - Add the following URL to the field: `https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json`
    - Click `OK` to save the preferences.
 1. **Update VSCode Include Directory for WSL**
-   - Add Arduino library path `/mnt/c/Users/Your_Username/Documents/Arduino/libraries/**` to `c_cpp_properties.json`
+   - From a WSL terminal, add a symlink to your Windows user home directory with `ln -s /mnt/c/Users/Your_Username/ ~/win_home`
+   - Add Arduino library paths to `c_cpp_properties.json`
       - Note: do not escape spaces with a backslash
 1. **Restart VSCode**
 
