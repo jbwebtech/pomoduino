@@ -14,10 +14,19 @@ Pomoduino is an Arduino-based Pomodoro timer designed to enhance productivity an
    - In the Preferences window, find the `Additional Board Manager URLs` field.
    - Add the following URL to the field: `https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json`
    - Click `OK` to save the preferences.
+
+1. **Download and install dependancy libraries to Arduino IDE**
+   - [Adafruit NeoPixel](https://github.com/adafruit/Adafruit_NeoPixel)
+   - [Adafruit GFX Library](https://github.com/adafruit/Adafruit-GFX-Library)
+   - [Adafruit SSD1306](https://github.com/adafruit/Adafruit_SSD1306)
+   - [Adafruit MPR121](https://github.com/adafruit/Adafruit_MPR121)
+   - [Adafruit FRAM I2C](https://github.com/adafruit/Adafruit_FRAM_I2C)
+
 1. **Update VSCode Include Directory for WSL**
    - From a WSL terminal, add a symlink to your Windows user home directory with `ln -s /mnt/c/Users/Your_Username/ ~/win_home`
    - Add Arduino library paths to `c_cpp_properties.json`
       - Note: do not escape spaces with a backslash
+
 1. **Restart VSCode**
 
 This will enable the Arduino IDE to access the Seeeduino board definitions for installation and reference the C++ Arduino libraries in VSCode.
